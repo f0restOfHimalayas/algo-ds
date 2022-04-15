@@ -30,3 +30,5 @@ obj
 .vscode
 .intellij
 build
+.idea
+cp-practice/.idea
