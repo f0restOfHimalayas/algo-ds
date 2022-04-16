@@ -29,10 +29,10 @@ public static class WordBreak
         }
 
         var output = Recursive(dictionary, s, 0, 1);
-        Input.Print(output);
+        Input.PrintLn(output);
     }
 
-    private static bool Recursive(Dictionary<string, int> wordList, string s, int startIndex, int length, bool found = false)
+    private static bool Recursive(Dictionary<string, int> wordList, string s, int startIndex, int length)
     {
         if (string.IsNullOrWhiteSpace(s))
         {
@@ -41,17 +41,21 @@ public static class WordBreak
 
         if (startIndex + length > s.Length)
         {
-            return found;
+            return false;
         }
 
         var substring = s.Substring(startIndex, length);
         if (wordList.ContainsKey(substring))
         {
             var index = startIndex + length;
-            var result = Recursive(wordList, s, index, 1, true);
-            if (result)
+            if (index  == s.Length)
             {
-                return result;
+                return true;
+            }
+            var endOfSentenceReached = Recursive(wordList, s, index, 1);
+            if (endOfSentenceReached)
+            {
+                return true;
             }
         }
 
